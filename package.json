@@ -1,16 +1,29 @@
 {
-  "name": "My Email AI agent",
+  "name": "email-ai-agent",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:dev": "ts-node src/index.ts",
+    "run:auth": "ts-node src/services/gmailAPIAuth.service.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.10.0",
   "devDependencies": {
+    "@types/express": "^5.0.2",
+    "@types/node": "^22.15.29",
+    "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@google-cloud/local-auth": "2.1.0",
+    "@google/generative-ai": "^0.24.1",
+    "axios": "^1.9.0",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "google-auth-library": "10.1.0",
+    "googleapis": "124.0.0"
   }
 }
