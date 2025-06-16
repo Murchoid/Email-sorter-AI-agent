@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { config } from './config';
+import { config } from '../configs/config';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const contents = fs.readFileSync(config.credentials_path, 'utf-8');

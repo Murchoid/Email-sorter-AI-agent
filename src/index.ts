@@ -4,7 +4,7 @@ import {
   applyLabel,
   ensureLabelExists,
 } from './services/gmail.service';
-import { categorizeEmail } from './categorize';
+import { categorizeEmail } from './services/categorize.service';
 
 async function main() {
   const emails = await getRecentEmails();

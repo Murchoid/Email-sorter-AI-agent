@@ -1,5 +1,5 @@
 import { google } from 'googleapis';
-import { config } from '../config';
+import { config } from '../configs/config';
 import fs from 'fs';
 
 const contents = fs.readFileSync(config.credentials_path, 'utf-8');

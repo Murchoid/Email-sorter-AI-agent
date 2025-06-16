@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { authenticate } from '@google-cloud/local-auth';
 import { OAuth2Client } from 'google-auth-library';
-import { config } from '../config';
+import { config } from '../configs/config';
 
 const TOKEN_PATH = config.token_path;
 const SCOPE = config.scope;
