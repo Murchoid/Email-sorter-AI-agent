@@ -2,17 +2,16 @@ import fs from 'fs';
 import { authenticate } from '@google-cloud/local-auth';
 import { OAuth2Client } from 'google-auth-library';
 import { config } from '../configs/config';
+import path from 'path';
+import process from 'process';
 
-const TOKEN_PATH = config.token_path;
-const SCOPE = config.scope;
-const CREDENTIALS_PATH = config.credentials_path;
+const ENVPATH = path.join(process.cwd(), '../.env');
+const CREDENTIALS_PATH = path.join(process.cwd(), '../credentials/credentials.json');
 
 async function loadSavedCredentials(): Promise<OAuth2Client | null> {
   try {
-    const content = await fs.promises.readFile(TOKEN_PATH, 'utf-8');
-    const credentials = JSON.parse(content);
-
-    const { client_id, client_secret, refresh_token, type } = credentials;
+   
+    const { client_id, client_secret, refresh_token } = config;
     const oAuth2Client = new OAuth2Client(client_id, client_secret);
     oAuth2Client.setCredentials({ refresh_token });
     return oAuth2Client;
@@ -25,14 +24,16 @@ async function saveCredentials(client: OAuth2Client) {
   const content = await fs.promises.readFile(CREDENTIALS_PATH, 'utf-8');
   const keys = JSON.parse(content);
   const key = keys.installed || keys.web;
-  const payload = JSON.stringify({
-    type: 'authorized_user',
-    client_id: key.client_id,
-    client_secret: key.client_secret,
-    refresh_token: (client.credentials as any).refresh_token,
-  });
+  const refreshToken = (client.credentials as any).refresh_token;
 
-  await fs.promises.writeFile(TOKEN_PATH, payload);
+  const envData = [
+    `CLIENT_ID=${key.client_id}`,
+    `CLIENT_SECRET=${key.client_secret}`,
+    `REFRESH_TOKEN=${refreshToken}`
+  ].join('\n');
+
+  await fs.promises.appendFile(ENVPATH, '\n' + envData);
+  console.log('Credentials written to .env');
 }
 
 async function authorize(): Promise<OAuth2Client> {
@@ -41,8 +42,8 @@ async function authorize(): Promise<OAuth2Client> {
     return client;
   }
   client = (await authenticate({
-    scopes: SCOPE,
-    keyfilePath: CREDENTIALS_PATH,
+    scopes: config.scope,
+    keyfilePath: ENVPATH,
   })) as unknown as OAuth2Client;
 
   if (client?.credentials) {
