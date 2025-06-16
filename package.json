@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
+    "start": "pnpm run build && node dist/index.js",
     "start:dev": "ts-node src/index.ts",
     "run:auth": "ts-node src/services/gmailAPIAuth.service.ts"
   },
