@@ -43,7 +43,7 @@ export async function ensureLabelExists(labelName: string): Promise<string> {
 export async function getRecentEmails() {
   const { data } = await gmail.users.messages.list({
     userId: 'me',
-    maxResults: 100,
+    maxResults: 20,
     labelIds: ['INBOX'],
   });
 

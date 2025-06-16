@@ -16,7 +16,6 @@ Promotions:	Discounts, marketing emails, ecommerce sales
 Social:	Notifications from social media platforms (FB, Instagram, Twitter/X)
 Updates:	Newsletters, subscriptions, product updates, GitHub, dev tools
 Education:	Online course updates, school emails, certificates
-Spam:	Obvious junk you don’t want to see
 News:	Newsletters from media houses like BBC, CNN, Daily Nation, etc.
 Travel:	Booking confirmations, flight/train info, AirBnB, Uber receipts
 Health:	Hospital records, insurance, mental wellness, gym notifications

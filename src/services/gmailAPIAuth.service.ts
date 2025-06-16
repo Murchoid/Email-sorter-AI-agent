@@ -52,6 +52,6 @@ async function authorize(): Promise<OAuth2Client> {
   return client;
 }
 
-authorize().then((client) => {
-  console.log(client.credentials.refresh_token);
-});
+authorize().catch(err=>{
+  console.log(err)
+})
