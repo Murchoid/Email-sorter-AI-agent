@@ -1,15 +1,16 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
-import path from 'path';
 import process from "process";
 
-const SCOPE = ['https://www.googleapis.com/auth/gmail.labels','https://www.googleapis.com/auth/gmail.readonly', 'https://www.googleapis.com/auth/gmail.modify'];
-const TOKEN_PATH = path.join(process.cwd(), './src/credentials/token.json');
-const CREDENTIALS_PATH = path.join(process.cwd(), './src/credentials/credentials.json');
+const SCOPE = process.env.GOOGLE_SCOPES?.split(',') ?? [];
 
 export const config = {
   scope: SCOPE,
-  token_path: TOKEN_PATH,
-  credentials_path: CREDENTIALS_PATH,
+  refresh_token: process.env.REFRESH_TOKEN,
+  gmailApi: process.env.GMAIL_API_KEY,
+  geminiApi: process.env.GEMINI_API_KEY,
+  client_id: process.env.CLIENT_ID,
+  client_secret: process.env.CLIENT_SECRET,
+  redirect_uri: process.env.REDIRECT_URI,
 };
 

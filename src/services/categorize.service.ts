@@ -2,9 +2,7 @@ import fs from 'fs';
 import { config } from '../configs/config';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-const contents = fs.readFileSync(config.credentials_path, 'utf-8');
-const keys = JSON.parse(contents);
-const gemApiKey = keys.installed.GEMINI_API_KEY;
+const gemApiKey = config.geminiApi!;
 const genAI = new GoogleGenerativeAI(gemApiKey);
 
 export async function categorizeEmail(emailText: string): Promise<string> {

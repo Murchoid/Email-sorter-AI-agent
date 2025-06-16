@@ -1,20 +1,21 @@
+/*
+TODO: fix this file to handle better the authorization and storing of credentials
+*/
+
 import { google } from 'googleapis';
 import { config } from '../configs/config';
 import fs from 'fs';
+import dotenv from 'dotenv';
 
-const contents = fs.readFileSync(config.credentials_path, 'utf-8');
-const credentials = JSON.parse(contents);
-const { client_id, client_secret, redirect_uris } =
-  credentials.installed || credentials.web;
-
-const tokenContents = fs.readFileSync(config.token_path, 'utf-8');
-const { refresh_token } = JSON.parse(tokenContents);
+dotenv.config();
 
 const oAuth2Client = new google.auth.OAuth2(
-  client_id,
-  client_secret,
-  redirect_uris[0]
+  process.env.CLIENT_ID,
+  process.env.CLIENT_SECRET,
+  process.env.REDIRECT_URI
 );
+const refresh_token = process.env.REFRESH_TOKEN;
+
 oAuth2Client.setCredentials({ refresh_token });
 const gmail = google.gmail({ version: 'v1', auth: oAuth2Client });
 

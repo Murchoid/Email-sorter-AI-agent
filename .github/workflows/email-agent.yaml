@@ -1,0 +1,25 @@
+name: Email Agent Cron Job
+
+on:
+  schedule:
+    - cron: '0 14 * * *' # 5PM EAT is 14:00 UTC
+  workflow_dispatch:     # Optional: to trigger manually
+
+jobs:
+  run-email-agent:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run the agent
+      run: npm start
