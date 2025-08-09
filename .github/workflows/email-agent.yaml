@@ -8,6 +8,14 @@ on:
 jobs:
   run-email-agent:
     runs-on: ubuntu-latest
+    env:
+      GMAIL_API_KEY: ${{ secrets.GMAIL_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      CLIENT_ID: ${{ secrets.CLIENT_ID }}
+      CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+      REDIRECT_URI: ${{ secrets.REDIRECT_URI }}
+      REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+      SCOPE: ${{ secrets.SCOPE }}
 
     steps:
     - name: Checkout code
